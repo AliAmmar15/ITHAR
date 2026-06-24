@@ -6,6 +6,8 @@ import { WaitlistForm } from '@/components/waitlist/WaitlistForm'
 import { WaitlistFAQ } from '@/components/waitlist/WaitlistFAQ'
 import { db } from '@/lib/db'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'ITHAR — The Wilayah Hoodie',
   description: 'Be among the first. Join the waitlist for The Wilayah Hoodie — The Risers Collection, Season 01 by ITHAR.',

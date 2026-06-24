@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 import { waitlistSchema, type WaitlistFormData } from '@/lib/validations'
 import { sendEmail } from '@/lib/resend'
 import { createElement } from 'react'
+import { revalidatePath } from 'next/cache'
 
 export async function joinWaitlist(data: WaitlistFormData) {
   const validated = waitlistSchema.safeParse(data)
@@ -45,6 +46,7 @@ export async function joinWaitlist(data: WaitlistFormData) {
       console.error('[Waitlist email error]', emailErr)
     }
 
+    revalidatePath('/')
     return { success: true, position: member.position }
   } catch (err) {
     console.error('[Waitlist join error]', err)
