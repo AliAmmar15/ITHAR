@@ -15,7 +15,7 @@ import { createCheckoutSession } from '@/actions/checkout'
 
 export default function CheckoutPage() {
   const { items, getSubtotal } = useCartStore()
-  const [selectedShipping, setSelectedShipping] = useState(SHIPPING_METHODS[0].id)
+  const [selectedShipping, setSelectedShipping] = useState<string>(SHIPPING_METHODS[0].id)
   const [couponCode, setCouponCode] = useState('')
   const [couponDiscount, setCouponDiscount] = useState(0)
   const [isProcessing, setIsProcessing] = useState(false)

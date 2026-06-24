@@ -17,7 +17,7 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersProps
 
   const where = status ? { status: status as any } : {}
 
-  const [orders, total] = await Promise.all([
+  const result = await Promise.all([
     db.order.findMany({
       where,
       orderBy: { createdAt: 'desc' },
@@ -28,7 +28,10 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersProps
       },
     }),
     db.order.count({ where }),
-  ]).catch(() => [[], 0] as [typeof orders, number])
+  ]).catch(() => null)
+
+  const orders = result?.[0] ?? []
+  const total = result?.[1] ?? 0
 
   const statuses = ['PENDING', 'CONFIRMED', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED']
   const statusColors: Record<string, string> = {
