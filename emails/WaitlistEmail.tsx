@@ -15,7 +15,7 @@ export function WaitlistEmail({ name, position, size }: WaitlistEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>You&apos;re #{position} on the ITHAR Waitlist — The Wilayah Hoodie drops soon.</Preview>
+      <Preview>{`You're #${position} on the ITHAR Waitlist — The Wilayah Hoodie drops soon.`}</Preview>
       <Body style={main}>
         <Container style={container}>
 
