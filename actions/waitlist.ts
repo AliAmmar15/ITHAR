@@ -29,13 +29,17 @@ export async function joinWaitlist(data: WaitlistFormData) {
       },
     })
 
-    // Send welcome email
+    // Send waitlist confirmation email
     try {
-      const { WelcomeEmail } = await import('@/emails/WelcomeEmail')
+      const { WaitlistEmail } = await import('@/emails/WaitlistEmail')
       await sendEmail({
         to: member.email,
-        subject: 'You\'re on the ITHAR Waitlist',
-        react: createElement(WelcomeEmail, { name: member.firstName ?? 'Riser' }),
+        subject: `You're #${member.position} on the ITHAR Waitlist`,
+        react: createElement(WaitlistEmail, {
+          name: member.firstName ?? 'Riser',
+          position: member.position,
+          size: member.size,
+        }),
       })
     } catch (emailErr) {
       console.error('[Waitlist email error]', emailErr)
