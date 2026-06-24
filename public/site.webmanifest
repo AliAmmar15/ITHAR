@@ -1,0 +1,13 @@
+{
+  "name": "ITHAR — Clothing for the Risers",
+  "short_name": "ITHAR",
+  "description": "Premium streetwear inspired by timeless principles of loyalty, sacrifice, and devotion.",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0B0B0B",
+  "background_color": "#0B0B0B",
+  "display": "standalone",
+  "start_url": "/"
+}

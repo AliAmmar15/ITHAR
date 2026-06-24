@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-black: 11 11 11;
+    --color-charcoal: 26 26 26;
+    --color-gold: 184 154 103;
+    --color-off-white: 234 226 214;
+    --background: 11 11 11;
+    --foreground: 234 226 214;
+  }
+
+  * {
+    @apply border-charcoal-mid;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-black text-off-white font-sans;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0B0B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2E2E2E;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B89A67;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(184, 154, 103, 0.25);
+    color: #EAE2D6;
+  }
+
+  /* Focus */
+  :focus-visible {
+    outline: 1px solid #B89A67;
+    outline-offset: 2px;
+  }
+
+  /* Typography base */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-light tracking-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  img, video {
+    @apply max-w-full;
+  }
+
+  /* Arabic text direction */
+  [lang="ar"], .arabic {
+    direction: rtl;
+    font-family: var(--font-noto-arabic), serif;
+  }
+
+  /* Input reset */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #EAE2D6;
+    -webkit-box-shadow: 0 0 0px 1000px #1A1A1A inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@layer components {
+  /* ─── Luxury Button Variants ─── */
+  .btn-gold {
+    @apply inline-flex items-center justify-center
+           bg-gold text-black
+           px-8 py-3.5
+           text-xs font-medium tracking-wide-xl uppercase
+           transition-all duration-200 ease-luxury
+           hover:bg-gold-light
+           active:bg-gold-muted
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center
+           bg-transparent text-off-white
+           border border-gold
+           px-8 py-[13px]
+           text-xs font-medium tracking-wide-xl uppercase
+           transition-all duration-200 ease-luxury
+           hover:bg-charcoal
+           active:bg-charcoal-mid
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center
+           bg-transparent text-off-white
+           border border-charcoal-light
+           px-8 py-[13px]
+           text-xs font-medium tracking-wide-xl uppercase
+           transition-all duration-200 ease-luxury
+           hover:border-gold hover:text-gold
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-text {
+    @apply inline-flex items-center gap-2
+           text-xs font-medium tracking-wide-xl uppercase text-warm-gray
+           transition-colors duration-200
+           hover:text-off-white;
+  }
+
+  /* ─── Form Elements ─── */
+  .input-luxury {
+    @apply w-full bg-transparent border border-charcoal-light
+           px-4 py-3.5 text-sm text-off-white
+           placeholder:text-stone
+           focus:border-gold focus:outline-none
+           transition-colors duration-200;
+  }
+
+  .label-luxury {
+    @apply block text-[11px] font-medium tracking-wide-lg uppercase
+           text-warm-gray mb-2;
+  }
+
+  /* ─── Section Containers ─── */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-36;
+  }
+
+  .section-padding-sm {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  /* ─── Typography Utilities ─── */
+  .heading-display {
+    @apply font-serif font-light text-off-white;
+  }
+
+  .label-tag {
+    @apply text-[10px] font-medium tracking-brand uppercase text-warm-gray;
+  }
+
+  /* ─── Image Treatments ─── */
+  .image-luxury {
+    @apply object-cover object-top transition-transform duration-[400ms] ease-luxury;
+  }
+
+  .image-hover {
+    @apply hover:scale-[1.04] transition-transform duration-[400ms] ease-luxury;
+  }
+
+  /* ─── Gold accent line ─── */
+  .gold-line {
+    @apply w-8 h-px bg-gold;
+  }
+
+  /* ─── Overlay gradient ─── */
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent;
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    @apply border-t border-charcoal-mid;
+  }
+
+  /* ─── Card ─── */
+  .card-luxury {
+    @apply bg-charcoal border border-charcoal-mid
+           transition-all duration-300 ease-luxury
+           hover:border-charcoal-light;
+  }
+
+  /* ─── Skeleton loading ─── */
+  .skeleton {
+    @apply bg-charcoal animate-pulse;
+    background: linear-gradient(
+      90deg,
+      #1A1A1A 25%,
+      #252525 50%,
+      #1A1A1A 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ─── Nav link ─── */
+  .nav-link {
+    @apply text-[11px] font-medium tracking-wide-xl uppercase text-warm-gray
+           transition-colors duration-200
+           hover:text-off-white
+           relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-gold
+           transition-all duration-200;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, #B89A67, #D4AF37, #8B7355);
+  }
+}
