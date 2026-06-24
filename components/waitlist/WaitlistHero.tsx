@@ -39,9 +39,9 @@ export function WaitlistHero({ waitlistCount }: WaitlistHeroProps) {
           <Image
             src="/images/logo-gold.svg"
             alt="ITHAR"
-            width={60}
-            height={60}
-            className="w-12 h-12 object-contain mx-auto"
+            width={800}
+            height={800}
+            className="w-400 h-400 object-contain mx-auto"
           />
         </motion.div>
 
