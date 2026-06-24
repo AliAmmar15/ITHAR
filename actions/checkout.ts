@@ -1,6 +1,6 @@
 'use server'
 
-import { stripe } from '@/lib/stripe'
+import { createStripeCheckoutSession } from '@/lib/stripe'
 import { db } from '@/lib/db'
 import { auth } from '@/lib/auth'
 import { absoluteUrl, generateOrderNumber } from '@/lib/utils'
@@ -84,24 +84,16 @@ export async function createCheckoutSession(input: CreateCheckoutInput) {
   const orderNumber = generateOrderNumber()
 
   try {
-    const stripeSession = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: lineItems,
-      mode: 'payment',
-      success_url: absoluteUrl(`/order-success?session_id={CHECKOUT_SESSION_ID}&order=${orderNumber}`),
-      cancel_url: absoluteUrl('/checkout'),
-      customer_email: shippingAddress.email,
+    const stripeSession = await createStripeCheckoutSession({
+      lineItems,
+      successUrl: absoluteUrl(`/order-success?session_id={CHECKOUT_SESSION_ID}&order=${orderNumber}`),
+      cancelUrl: absoluteUrl('/checkout'),
+      customerEmail: shippingAddress.email,
       metadata: {
         orderNumber,
         userId: session?.user?.id ?? '',
         shippingMethodId,
       },
-      shipping_address_collection: {
-        allowed_countries: ['US', 'CA', 'GB', 'AU', 'AE', 'SA', 'KW', 'QA', 'BH', 'OM', 'IQ'],
-      },
-      billing_address_collection: 'required',
-      phone_number_collection: { enabled: true },
-      automatic_tax: { enabled: false },
     })
 
     return { url: stripeSession.url, sessionId: stripeSession.id }

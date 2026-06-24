@@ -1,9 +1,14 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
-  typescript: true,
-})
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not set')
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-02-24.acacia',
+    typescript: true,
+  })
+}
 
 export async function createStripeCheckoutSession({
   lineItems,
@@ -20,6 +25,7 @@ export async function createStripeCheckoutSession({
   metadata?: Record<string, string>
   coupon?: string
 }) {
+  const stripe = getStripe()
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: lineItems,
@@ -44,13 +50,13 @@ export async function createStripeCheckoutSession({
 }
 
 export async function retrieveCheckoutSession(sessionId: string) {
-  return stripe.checkout.sessions.retrieve(sessionId, {
+  return getStripe().checkout.sessions.retrieve(sessionId, {
     expand: ['payment_intent', 'line_items.data.price.product'],
   })
 }
 
 export function constructWebhookEvent(payload: string | Buffer, signature: string) {
-  return stripe.webhooks.constructEvent(
+  return getStripe().webhooks.constructEvent(
     payload,
     signature,
     process.env.STRIPE_WEBHOOK_SECRET!
