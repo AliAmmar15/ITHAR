@@ -39,8 +39,8 @@ export function WaitlistHero({ waitlistCount }: WaitlistHeroProps) {
           <Image
             src="/images/logo-gold.svg"
             alt="ITHAR"
-            width={800}
-            height={800}
+            width={150}
+            height={150}
             className="w-400 h-400 object-contain mx-auto"
           />
         </motion.div>
@@ -92,14 +92,15 @@ export function WaitlistHero({ waitlistCount }: WaitlistHeroProps) {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-xs mx-auto"
+          className="max-w-sm mx-auto"
         >
-          <div className="relative aspect-[3/4] overflow-hidden border border-charcoal-mid">
+          <div className="relative overflow-hidden border border-charcoal-mid">
             <Image
-              src="/images/wilayah-hoodie-front.png"
+              src="/images/wilayah-hoodie.svg"
               alt="The Wilayah Hoodie"
-              fill
-              className="object-cover object-top"
+              width={600}
+              height={750}
+              className="w-full h-auto"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 text-center">

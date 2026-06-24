@@ -49,13 +49,13 @@ export function Header() {
 
             {/* Left — Instagram (desktop) */}
             <a
-              href="https://instagram.com/itharclothing"
+              href="https://instagram.com/ithar_store"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:flex items-center gap-2 text-warm-gray hover:text-gold transition-colors duration-200 text-[11px] tracking-widest uppercase"
             >
               <Instagram size={14} />
-              @itharclothing
+              @ithar_store
             </a>
 
             {/* Center — Logo */}
@@ -65,7 +65,7 @@ export function Header() {
               aria-label="ITHAR — Home"
             >
               <Image
-                src="/images/logo-gold.svg"
+                src="/images/logo2.svg"
                 alt="ITHAR"
                 width={56}
                 height={56}
@@ -107,7 +107,7 @@ export function Header() {
             >
               <div className="flex items-center justify-between p-6 border-b border-charcoal-mid">
                 <Image
-                  src="/images/logo-gold.svg"
+                  src="/images/logo2.svg"
                   alt="ITHAR"
                   width={40}
                   height={40}

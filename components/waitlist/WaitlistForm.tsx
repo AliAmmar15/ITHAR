@@ -102,9 +102,9 @@ export function WaitlistForm() {
                 <div>
                   <label className="label-luxury">Preferred Size</label>
                   <select {...register('size')} className="input-luxury appearance-none">
-                    <option value="">Select a size</option>
+                    <option value="" className="text-black">Select a size</option>
                     {SIZES.map((size) => (
-                      <option key={size} value={size}>{size}</option>
+                      <option key={size} value={size} className="text-black">{size}</option>
                     ))}
                   </select>
                 </div>

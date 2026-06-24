@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   'Premium streetwear inspired by timeless principles of loyalty, sacrifice, and devotion. Wear it with intention.'
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ithar.co'
 
-export const INSTAGRAM_URL = 'https://instagram.com/itharclothing'
+export const INSTAGRAM_URL = 'https://instagram.com/ithar_store'
 export const TWITTER_URL = 'https://twitter.com/itharclothing'
 
 export const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'] as const
