@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
-export const EMAIL_FROM = process.env.EMAIL_FROM ?? 'ITHAR <noreply@ithar.co>'
-export const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO ?? 'support@ithar.co'
+export const EMAIL_FROM = process.env.EMAIL_FROM ?? 'ITHAR <noreply@ithar.store>'
+export const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO ?? 'support@ithar.store'
 
 function getResend() {
   if (!process.env.RESEND_API_KEY) return null

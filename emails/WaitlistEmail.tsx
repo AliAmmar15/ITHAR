@@ -79,7 +79,7 @@ export function WaitlistEmail({ name, position, size }: WaitlistEmailProps) {
 
             <Text style={paragraph}>
               Questions? Reply to this email or reach us at{' '}
-              <Link href="mailto:support@ithar.co" style={link}>support@ithar.co</Link>.
+              <Link href="mailto:support@ithar.store" style={link}>support@ithar.store</Link>.
             </Text>
           </Section>
 
@@ -87,7 +87,7 @@ export function WaitlistEmail({ name, position, size }: WaitlistEmailProps) {
           <Section style={footer}>
             <Text style={footerText}>ITHAR — Clothing for the Risers.</Text>
             <Text style={footerSmall}>
-              You received this because you joined the waitlist at ithar.co.
+              You received this because you joined the waitlist at ithar.store.
             </Text>
           </Section>
 
