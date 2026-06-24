@@ -28,7 +28,7 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersProps
       },
     }),
     db.order.count({ where }),
-  ]).catch(() => [[], 0])
+  ]).catch(() => [[], 0] as [typeof orders, number])
 
   const statuses = ['PENDING', 'CONFIRMED', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED']
   const statusColors: Record<string, string> = {
