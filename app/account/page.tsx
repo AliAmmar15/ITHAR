@@ -66,7 +66,7 @@ export default async function AccountPage() {
           {[
             { label: 'Orders', value: orders.length, href: '/account/orders' },
             { label: 'Wishlist', value: wishlistCount, href: '/account/wishlist' },
-            { label: 'Member Since', value: formatDate(user?.createdAt ?? new Date(), { year: 'numeric', month: 'short' }), href: null },
+            { label: 'Member Since', value: formatDate((user as any)?.createdAt ?? new Date(), { year: 'numeric', month: 'short' }), href: null },
           ].map((stat) => (
             <div key={stat.label} className={`p-6 border border-charcoal-mid bg-charcoal ${stat.href ? 'hover:border-gold transition-colors cursor-pointer' : ''}`}>
               {stat.href ? (
