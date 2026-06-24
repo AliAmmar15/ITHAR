@@ -14,6 +14,7 @@ import {
   BarChart2,
   Settings,
   LogOut,
+  ListOrdered,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -23,7 +24,7 @@ const navItems = [
   { label: 'Orders', href: '/admin/orders', icon: ShoppingCart },
   { label: 'Customers', href: '/admin/customers', icon: Users },
   { label: 'Newsletter', href: '/admin/newsletter', icon: Mail },
-  { label: 'Waitlist', href: '/admin/waitlist', icon: Users },
+  { label: 'Waitlist', href: '/admin/waitlist', icon: ListOrdered },
   { label: 'Coupons', href: '/admin/coupons', icon: Tag },
   { label: 'Journal', href: '/admin/journal', icon: BookOpen },
   { label: 'Analytics', href: '/admin/analytics', icon: BarChart2 },
