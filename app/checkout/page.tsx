@@ -12,12 +12,16 @@ import { shippingAddressSchema, type ShippingAddressFormData } from '@/lib/valid
 import { formatPrice, cn } from '@/lib/utils'
 import { SHIPPING_METHODS, TAX_RATE } from '@/lib/constants'
 import { createCheckoutSession } from '@/actions/checkout'
+import { validateCoupon } from '@/actions/validateCoupon'
 
 export default function CheckoutPage() {
   const { items, getSubtotal } = useCartStore()
   const [selectedShipping, setSelectedShipping] = useState<string>(SHIPPING_METHODS[0].id)
   const [couponCode, setCouponCode] = useState('')
   const [couponDiscount, setCouponDiscount] = useState(0)
+  const [couponError, setCouponError] = useState<string | null>(null)
+  const [couponApplied, setCouponApplied] = useState(false)
+  const [isApplyingCoupon, setIsApplyingCoupon] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
   const {
@@ -33,6 +37,24 @@ export default function CheckoutPage() {
   const shippingCost = subtotal >= 100 ? 0 : selectedShippingMethod.price
   const taxAmount = (subtotal - couponDiscount) * TAX_RATE
   const total = subtotal - couponDiscount + shippingCost + taxAmount
+
+  const handleApplyCoupon = async () => {
+    setCouponError(null)
+    setCouponApplied(false)
+    setIsApplyingCoupon(true)
+    try {
+      const result = await validateCoupon(couponCode, subtotal)
+      if (result.error) {
+        setCouponError(result.error)
+        setCouponDiscount(0)
+      } else {
+        setCouponDiscount(result.discount ?? 0)
+        setCouponApplied(true)
+      }
+    } finally {
+      setIsApplyingCoupon(false)
+    }
+  }
 
   const onSubmit = async (address: ShippingAddressFormData) => {
     setIsProcessing(true)
@@ -177,13 +199,20 @@ export default function CheckoutPage() {
                   type="text"
                   placeholder="Enter coupon code"
                   value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                  onChange={(e) => { setCouponCode(e.target.value.toUpperCase()); setCouponApplied(false); setCouponError(null) }}
                   className="input-luxury flex-1 uppercase"
                 />
-                <button type="button" className="btn-outline px-6 flex-shrink-0">
-                  Apply
+                <button
+                  type="button"
+                  onClick={handleApplyCoupon}
+                  disabled={isApplyingCoupon || !couponCode}
+                  className="btn-outline px-6 flex-shrink-0 disabled:opacity-50"
+                >
+                  {isApplyingCoupon ? '…' : 'Apply'}
                 </button>
               </div>
+              {couponError && <p className="text-red-400 text-xs mt-2">{couponError}</p>}
+              {couponApplied && <p className="text-emerald-400 text-xs mt-2">Coupon applied!</p>}
             </section>
 
             {/* Submit */}

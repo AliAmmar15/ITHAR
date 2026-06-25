@@ -2,17 +2,19 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingBag, Heart, Ruler, ChevronDown, ChevronUp } from 'lucide-react'
+import { ShoppingBag, Ruler, ChevronDown, ChevronUp } from 'lucide-react'
 import { useCartStore } from '@/store/cart'
 import { formatPrice, getStockStatus, cn } from '@/lib/utils'
 import { SizeGuideModal } from '@/components/product/SizeGuideModal'
+import { WishlistButton } from '@/components/product/WishlistButton'
 import type { ProductWithDetails } from '@/types'
 
 interface ProductInfoProps {
   product: ProductWithDetails
+  initialWishlisted?: boolean
 }
 
-export function ProductInfo({ product }: ProductInfoProps) {
+export function ProductInfo({ product, initialWishlisted = false }: ProductInfoProps) {
   const [selectedVariantId, setSelectedVariantId] = useState(product.variants[0]?.id ?? '')
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
   const [quantity, setQuantity] = useState(1)
@@ -241,12 +243,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </AnimatePresence>
         </motion.button>
 
-        <button
-          className="p-4 border border-charcoal-mid hover:border-gold text-warm-gray hover:text-gold transition-all duration-200"
-          aria-label="Add to wishlist"
-        >
-          <Heart size={18} />
-        </button>
+        <WishlistButton productId={product.id} initialSaved={initialWishlisted} />
       </div>
 
       {/* Accordion — Fabric / Care / Shipping */}

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
+import { auth } from '@/lib/auth'
 import { ProductGallery } from '@/components/product/ProductGallery'
 import { ProductInfo } from '@/components/product/ProductInfo'
 import { ProductStory } from '@/components/product/ProductStory'
@@ -47,9 +48,17 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params
-  const product = await getProduct(slug)
+  const [product, session] = await Promise.all([getProduct(slug), auth()])
 
   if (!product) notFound()
+
+  let initialWishlisted = false
+  if (session?.user?.id) {
+    const item = await db.wishlistItem.findUnique({
+      where: { userId_productId: { userId: session.user.id, productId: product.id } },
+    }).catch(() => null)
+    initialWishlisted = !!item
+  }
 
   return (
     <div className="pt-16 md:pt-18">
@@ -57,7 +66,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="container mx-auto py-10 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
           <ProductGallery images={product.images} productName={product.name} />
-          <ProductInfo product={product as any} />
+          <ProductInfo product={product as any} initialWishlisted={initialWishlisted} />
         </div>
       </section>
 
