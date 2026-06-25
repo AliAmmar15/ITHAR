@@ -2,6 +2,8 @@ import { Suspense } from 'react'
 import Image from 'next/image'
 import { LoginForm } from './LoginForm'
 
+export const dynamic = 'force-dynamic'
+
 export default function LoginPage() {
   return (
     <div className="min-h-screen bg-black flex">
